@@ -11,6 +11,7 @@ const io = new Server(httpServer, {
 io.on('connection', (socket) => {
 	socket.on('controller-connected', (stopwatchId) => {
 		socket.join('controllers');
+		io.to('stopwatches').emit('controller-connected', stopwatchId);
 		console.log('controller-connected =>', stopwatchId);
 	});
 
