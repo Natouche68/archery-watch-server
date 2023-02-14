@@ -12,22 +12,18 @@ io.on('connection', (socket) => {
 	socket.on('controller-connected', (stopwatchId) => {
 		socket.join('controllers');
 		io.to('stopwatches').emit('controller-connected', stopwatchId);
-		console.log('controller-connected =>', stopwatchId);
 	});
 
 	socket.on('start-stopwatch', (stopwatchId, twoWaves, time) => {
-		console.log('start-stopwatch =>', stopwatchId, twoWaves, time);
 		io.to('stopwatches').emit('start-stopwatch', stopwatchId, twoWaves, time);
 	});
 
 	socket.on('stop-stopwatch', (stopwatchId) => {
-		console.log('stop-stopwatch =>', stopwatchId);
 		io.to('stopwatches').emit('stop-stopwatch', stopwatchId);
 	});
 
 	socket.on('stopwatch-connected', () => {
 		socket.join('stopwatches');
-		console.log('stopwatch-connected');
 	});
 
 	socket.on('stopwatch-started', (stopwatchId) => {
@@ -40,3 +36,5 @@ io.on('connection', (socket) => {
 });
 
 io.listen('8080');
+
+console.log('🚀 Server is running !');
